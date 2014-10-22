@@ -6,9 +6,11 @@
 
 using namespace std;
 
+int n;
+
 void dksrt(int g[100][100], int start)
 {
-	int distance[100], count, index, i, u, m=start+1,n;
+	int distance[100], count, index, i, u, m=start+1;
 	bool visited[100];
 
 	for (i=0; i<n; i++)
@@ -21,7 +23,7 @@ void dksrt(int g[100][100], int start)
 
 	for (count=0; count<n; count++)
 	{
-		int min=INT_MAX;
+		int min=1000;
 
 		for (i=0; i<n; i++)
 			if (!visited[i] && distance[i]<=min)
@@ -52,7 +54,6 @@ int main()
 {
 	int g[100][100];//граф
 	int s; //заданная вершина
-	int n; //количество вершин
 
 	cout << "Input start = "; //стартовая вершина
 	cin >> s;
@@ -68,7 +69,7 @@ int main()
 			cin >> g[i][j];  
 		}
 
-	dksrt(g[100][100], s);
+	dksrt(g, s-1);
 
 	return 0;
 }
