@@ -1,71 +1,54 @@
-/*Алгоритм Прима для построения минимального остовного дерева начиает обход с 1 вершины и создает дерево, добавляя по 1 ребру, пока не будут включены все 
-вершины. На каждом этапе мы вставляем в дерево новую вершину. "Жадный" алгоритм выбирает ребро с наименьшим весом */
-
 #include <iostream>
-
+#include <vector>
+#include <iomanip>
+#define forn(i,n) for(int i=0;i<n;i++)
 using namespace std;
-
-int matx[100][100];//матрица смежности
-int visited[100] = {0}; 
-int v, ne = 1;
-int MIN; //текущее минималньое расстояние
-int mm;
-
+int n,m;
+vector <pair<int,int> > g[500];//кроме вершин список смежности хранит и вес ребра
+vector <bool> used(500,0);//вектор использованных вершин
+int inf=10000000;
+vector <int> d(500,inf);//вектор расстояний
 int main()
 {
-	int m;
-	int u,v;
-	int p[100] = {0}; //массив вершин, по которым будет составляться путь
-	int pp  = 0; //индекс 
-	cout << "Number of vertex = ";
-	cin >> m;
-
-	cout << "Matrix: ";
-	for (int i = 1; i <= m; i++)
-		for (int j = 1; j <= m; j++)
-		{
-			cin >> matx[i][j];
-			if (matx[i][j] == 0)
-				matx[i][j] = 1000;
-		}
-
-	visited[1] = 1;
-
-	while (ne < m)
-	{
-		for (int i = 1; i <= m; i++)
-			for (int j = 1; j <= m; j++)
-				if (matx[i][j] < 1000)
-					if (visited[i] != 0)
-					{
-						MIN = matx[i][j];
-						u = i;
-						v = j;
-					}
-
-					if ((visited[u] == 0) || (visited[v] == 0))
-					{
-						p[pp] = v;
-						pp++;
-						ne++;
-						mm += MIN;
-						visited[v] = 1;
-					}
-		
-		matx[u][v] = 1000;
-	}
-
-	cout << "\n";
- 
-	cout << 1 << " --> ";
-	for (int i = 0;i < m-1; i++)
-	{
-	  cout << p[i];
-	  if (i < m-2) 
-	  	cout << " --> ";
-	}
- 	cout << endl;
-	cout << "Min is "<< mm;
-
-	return 0;
+    freopen("input.txt","rt",stdin);
+    freopen("output.txt","wt",stdout);
+    cin>>n>>m;
+    int x,y,l;
+    pair <int,int> temp;
+    forn(i,m){
+        cin>>x>>y>>l;
+        x--;
+        y--;
+        temp.first=y;
+        temp.second=l;
+        g[x].push_back(temp);
+        temp.first=x;
+        g[y].push_back(temp);
+    }
+    vector <pair<int,int> > path(500);   
+    d[0]=0;
+    while(true){
+        int v=-1;
+        int dist=inf;
+        forn(u,n)
+                if(!used[u] && dist>=d[u])
+                {
+                    v=u;
+                    dist=d[u];
+                }
+                if (v==-1) break;
+                used[v]=true;
+                forn(u,g[v].size())
+                    if(!used[g[v][u].first]) {
+                        if (d[g[v][u].first]>g[v][u].second) path[g[v][u].first]=make_pair(v,g[v][u].first);
+                        d[g[v][u].first]=min(d[g[v][u].first],g[v][u].second);                      
+                    }
+    }
+    long long sum=0;
+    forn(i,n) sum+=d[i];
+    cout<<sum<<endl;
+    forn(i,n-1)
+        cout<<path[i+1].first+1<<" "<<path[i+1].second+1<<endl;
+    
+    return 0;
 }
