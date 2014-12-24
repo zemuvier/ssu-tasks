@@ -1,122 +1,80 @@
-//РќР°Р№С‚Рё РґР»РёРЅС‹ РєСЂР°С‚С‡Р°Р№С€РёС… РїСѓС‚РµР№ РёР· РІРµСЂС€РёРЅС‹ u РІРѕ РІСЃРµ РѕСЃС‚Р°Р»СЊРЅС‹Рµ(2-17)
-//
-//#include <iostream>
-//#include <string>
-//#include <algorithm>
-//#include <sstream> //СЃС‚СЂРѕРєРѕРІС‹Рµ РїРѕС‚РѕРєРё
-//#include <vector>
-//#include <fstream>
-//
-//using namespace std;
-//
-//ifstream inp("input.txt");
-//ofstream outp("output.txt");
-//
-//string str;
-//int n; //С‡РёСЃР»Рѕ РІРµСЂС€РёРЅ
-//vector<vector<int> > g; //РіСЂР°С„
-//int u; //РґР°РЅРЅР°СЏ РІРµСЂС€РёРЅР°
-//int used[100] = {0};
-//int dist[100];
-//vector < pair<int, int> > g[100]; //РІ g[u] Р»РµР¶РёС‚ СЃРїРёСЃРѕРє РїР°СЂ: РґР»РёРЅР° РїСѓС‚РµР№ РјРµР¶РґСѓ u,v Рё РІРµСЂС€РёРЅР° v
-//
-//class queue
-//{
-//private:
-//struct Node
-//{
-//  int d;
-//      Node *p;
-//      }*h,*t;
-//
-//      public:
-//      queue(){ h = t = NULL; }
-//
-//      bool isEmpty() //РЅРµРїСѓСЃС‚РѕСЃС‚Р° РѕС‡РµСЂРµРґРё
-//      {
-//          return !h;
-//          }
-//
-//          void put(int x) //Р·Р°РїРёСЃСЊ РІ С…РІРѕСЃС‚
-//          {
-//              Node *tmp = new Node;
-//                  if (!h)
-//                          h = t= tmp;
-//                              else
-//                                  {
-//                                          t->p=tmp;
-//                                                  t=tmp;
-//                                                      }
-//                                                      }
-//
-//                                                      int take() //РІС‹Р±РѕСЂРєР° РёР· РѕС‡РµСЂРµРґРё
-//                                                      {
-//                                                          Node *tmp = h;
-//                                                              h=h->p;
-//                                                                  int x = tmp->d;
-//                                                                      delete tmp;
-//                                                                          if (!h)
-//                                                                                  t = NULL;
-//                                                                                      return x;
-//                                                                                      }
-//                                                                                      };
-//
-//                                                                                      queue<int> q;
-//
-//                                                                                      void bfs(int u)
-//                                                                                      {
-//                                                                                        dist[u] = 0;
-//                                                                                          p[u] = u
-//                                                                                            q.put(u);
-//                                                                                              while (!q.empty()) {
-//                                                                                                  int u = q.front();
-//                                                                                                      q.pop();
-//                                                                                                          for (int i = 0; i < (int) g[u].size(); i++)
-//                                                                                                              {
-//                                                                                                                    int v = g[u][i].second;
-//                                                                                                                          int len = g[u][i].first;
-//                                                                                                                                if (dist[v] > dist[u] + len)
-//                                                                                                                                      {
-//                                                                                                                                              p[v] = u;
-//                                                                                                                                                      dist[v] = dist[u] + len;
-//                                                                                                                                                              q.put(v);
-//                                                                                                                                                                    }
-//                                                                                                                                                                        }
-//                                                                                                                                                                          }
-//
-//
-//                                                                                                                                                                            for (int i = 0; i < g[u-1].size(); i++)
-//                                                                                                                                                                                  cout << i << " = " << dist[i] << endl;
-//                                                                                                                                                                                  }
-//                                                                                                                                                                                  int main()
-//                                                                                                                                                                                  {
-//                                                                                                                                                                                      inp >> n;
-//                                                                                                                                                                                          inp >> u;
-//
-//                                                                                                                                                                                              getline(inp, str);
-//
-//                                                                                                                                                                                                  for (int i = 0; i<n; i++)
-//                                                                                                                                                                                                      {
-//                                                                                                                                                                                                              getline(inp,str);
-//                                                                                                                                                                                                                      stringstream sio(str);
-//                                                                                                                                                                                                                              int x;
-//
-//                                                                                                                                                                                                                                      while (sio >> x)
-//                                                                                                                                                                                                                                                  g[i].push_back(x);
-//                                                                                                                                                                                                                                                      }
-//
-//                                                                                                                                                                                                                                                          bfs(u);
-//
-//                                                                                                                                                                                                                                                              return 0;
-//                                                                                                                                                                                                                                                              }
-//                                                                                                                                                                                                      }
-//                                                                                                                                                                                  }
-//                                                                                                                                      }
-//                                                                                                              }
-//                                                                                              }
-//                                                                                      }
-//                                                      }
-//                                  }
-//          }
-//      }
-//}}
+#include <iostream>
+#include <ctime>
+#include <vector>
+#include <sstream>
+#include <queue> 
+#include <fstream>
+#include <string>
+#include <algorithm>
+#include <map>
+
+using namespace std;
+
+#define INF 100000
+
+ifstream inp("input.txt");
+ofstream outp("output.txt");
+
+map <int,vector <int> > vec;
+string str;
+int n;
+int u;
+int pred[100]; // Массив предков
+queue <int> q; // Очередь, хранящая номера вершин входящих в неё
+int d[100] = {INF}; //массив путей
+int visit[100] = {0}; //массив посещений
+
+void bfs(int start)
+{
+visit[start] = 1;
+q.push(start); // Вступили на первую вершину
+pred[start]= -1; // Специальная метка для начала пути
+while(!q.empty()) // Пока хвост не совпадёт с головой
+{
+int v = q.front(); 
+q.pop(); // вершина u пройдена
+for(size_t i = 0; i < vec[v].size(); i++ ) // Смотрим смежные вершины
+{int ver=vec[v][i];
+if (visit[ver]==0) 
+{
+q.push(ver); // Вступаем на вершину i
+pred[ver] = v; // Путь обновляем
+if (d[v]==INF)
+d[ver]=1; else 
+d[ver] = d[v] + 1;
+visit[ver] = 1;
+}
+}
+} 
+
+vector<int> path;
+for (size_t l = 0; l < n; l++)
+if (l!=start) 
+
+cout << l+1 << " " << d[l] <<"\n";
+
+}
+
+int main()
+{
+int y;
+inp >> n;
+inp >> u;
+
+getline(inp,str);
+
+for (int i = 0; i < n; i++)
+{
+getline(inp,str);
+stringstream sio(str);
+int x;
+sio>>y;
+while (sio >> x)
+vec[y-1].push_back(x-1);
+}
+
+bfs(u-1);
+
+system("pause");
+return 0;
+}
