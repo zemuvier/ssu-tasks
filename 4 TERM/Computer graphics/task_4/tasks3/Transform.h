@@ -26,3 +26,4 @@ void rotate_r(float phi, mat c);//поворот
 void rotate_d(float phi, mat c);
 void scale(float Sx, float Sy, mat c);//масштабирование
 void trans(float Ty, mat c);
+void frame(float Vx, float Vy, float Vcx, float Vcy, float Wx, float Wy, float Wcx, float Wcy, mat c);

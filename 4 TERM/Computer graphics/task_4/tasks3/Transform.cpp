@@ -90,3 +90,22 @@ void trans(float Ty, mat c)
 	c[1][1] = -1;
 	c[1][2] = Ty; 
 }
+
+void frame (float Vx, float Vy, float Vcx, float Vcy, float Wx, float Wy, float Wcx, float Wcy, mat c) {
+
+mat R,c1;
+unit(R);
+unit(c);
+move(-Vcx,-Vcy,R);
+set(R,c1);
+unit(R);
+R[0][0]=Wx/Vx;R[1][1]=Wy/Vy;
+
+times(R,c1,c1);
+unit(R);R[1][1]=-1;
+times(R,c1,c1);
+move(Wcx,Wcy,R);
+times(R,c1,c);
+
+
+}

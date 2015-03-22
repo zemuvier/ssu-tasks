@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "Transform.h"
+#include "clip.h"
 #include "Form1.h"
  
 using namespace tasks3;
