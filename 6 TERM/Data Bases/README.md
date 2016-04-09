@@ -1,4 +1,4 @@
-DB Relational model - "Blogs" with 10 tables
+#DB Relational model - "Blogs" with 10 tables
 
 Fisrt task: create SQL-code for Microsoft SQL Server. Insert some data into tables and then delete them and full data base
 
