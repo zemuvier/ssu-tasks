@@ -9,3 +9,7 @@ Third task: create triggers for basic queries (INSERT, UPDATE, DELETE)
 Fourth: create the scheme of indexes of data in db. Types of indexes: clustered and nonclustered. Configuration: composite, covering, primary key, unique
 
 Fifth: create usual view, updatable and indexed views. Compare them
+
+Sixth: create 5 stored procedures which describe the functionality of the database
+
+Seventh: develop the logical and physical models of data warehouse
